@@ -439,7 +439,14 @@ void HookDirectDraw()
 
 DWORD WINAPI InitHook(LPVOID lpParam)
 {
-    g_hWnd = GetActiveWindow();
+    DWORD pid = GetCurrentProcessId();
+    HWND hWnd = NULL;
+    while ((hWnd = FindWindowEx(NULL, hWnd, NULL, NULL)) != NULL) {
+    DWORD dwPid = 0;
+    GetWindowThreadProcessId(hWnd, &dwPid);
+    if (dwPid == pid && IsWindowVisible(hWnd)) break;
+    }
+    g_hWnd = hWnd;
     UpdateCenter(g_hWnd);
 
     OriginalWndProc = (WNDPROC)SetWindowLongPtrW(
@@ -474,7 +481,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
     return TRUE;
 }
 
-DEFINE_HOOK(0x7CD810, GameRun, 0x9)
+DEFINE_HOOK(0x52CAE9, GameInt, 0x5)
 {
     CreateThread(nullptr, 0, InitHook, nullptr, 0, nullptr);
     return 0;
