@@ -439,6 +439,7 @@ void HookDirectDraw()
 
 DWORD WINAPI InitHook(LPVOID lpParam)
 {
+    g_hWnd = GetActiveWindow();
     UpdateCenter(g_hWnd);
 
     OriginalWndProc = (WNDPROC)SetWindowLongPtrW(
