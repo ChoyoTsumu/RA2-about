@@ -70,7 +70,7 @@
 ## 维护与支持
 
 - 项目发起者 & 核心作者：ChoyuTsumu
-- 维护者：Sovietianqi
+- 协助开发：Sovietianqi
 - 问题反馈：请使用 GitHub Issues
 
 欢迎提交 Pull Request 或参与讨论。
